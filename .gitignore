@@ -1,0 +1,15 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.idea/.rakeTasks
+.idea/ggm_domain.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+vendor/
