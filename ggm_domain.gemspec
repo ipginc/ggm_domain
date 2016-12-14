@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["ipgdeveloper"]
   spec.email         = ["jenkins@ipg.co.jp"]
 
-  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{ggmのドメイン情報をまとめたモジュール}
+  spec.description   = %q{ggmのドメイン情報をまとめたモジュール}
   spec.homepage      = "https://github.com/ipginc/ggm_domain.git"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
