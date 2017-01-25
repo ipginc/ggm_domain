@@ -118,5 +118,9 @@ module GgmDomain
       MINDS_AREA_TO_GGM_GROUP_ID[area_code]
     end
 
+    def self.mapping_ggm_to_minds_code(ggm_group_id)
+      GgmDomain::Area::MINDS_AREA_TO_GGM_GROUP_ID.invert[ggm_group_id]
+    end
+
   end
 end
