@@ -114,12 +114,14 @@ module GgmDomain
         134 => '沖縄'
     }.each_value(&:freeze).freeze
 
-    def self.mapping_minds_to_ggm_code(area_code)
-      MINDS_AREA_TO_GGM_GROUP_ID[area_code]
-    end
+    class << self
+      def mapping_minds_to_ggm_code(area_code)
+        MINDS_AREA_TO_GGM_GROUP_ID[area_code]
+      end
 
-    def self.mapping_ggm_to_minds_code(ggm_group_id)
-      GgmDomain::Area::MINDS_AREA_TO_GGM_GROUP_ID.invert[ggm_group_id]
+      def mapping_ggm_to_minds_code(ggm_group_id)
+        GgmDomain::Area::MINDS_AREA_TO_GGM_GROUP_ID.invert[ggm_group_id]
+      end
     end
 
   end

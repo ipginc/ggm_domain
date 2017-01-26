@@ -19,6 +19,10 @@ describe GgmDomain::Browser do
 
   UA_OF_MAC = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17"
 
+  GGM_ANDROID_LG = "Mozilla/5.0 (Linux; Android 5.0.2; DM-01G Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.93 Mobile Safari/537.36 GGM"
+
+  GGM_IOS = "Mozilla/5.0 (Linux; Android 5.0.2; DM-01G Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.93 Mobile Safari/537.36 GGM"
+
   describe '#what_is_os_name' do
     context 'IOSの場合' do
       context 'iPhoneの場合' do
@@ -249,6 +253,176 @@ describe GgmDomain::Browser do
         actual = GgmDomain::Browser.android_device_name UA_OF_AU_SOV34_CR
         expected = 'SOV34'
         expect(actual).to eq(expected)
+      end
+    end
+
+  end
+
+  describe '#is_ggm?' do
+    context 'GGM以外の場合' do
+      context 'Androidの場合' do
+        it 'falseが返却される' do
+          actual = GgmDomain::Browser.is_ggm? UA_OF_AU_SOV34_CR
+          expect(actual).to be_falsey
+        end
+      end
+      context 'IPhoneの場合' do
+        it 'falseが返却される' do
+          actual = GgmDomain::Browser.is_ggm? UA_OF_IPHONE
+          expect(actual).to be_falsey
+        end
+      end
+    end
+    context 'GGMの場合' do
+      context 'Androidの場合' do
+        it 'trueが返却される' do
+          actual = GgmDomain::Browser.is_ggm? GGM_ANDROID_LG
+          expect(actual).to be_truthy
+        end
+      end
+      context 'IPhoneの場合' do
+        it 'trueが返却される' do
+          actual = GgmDomain::Browser.is_ggm? GGM_IOS
+          expect(actual).to be_truthy
+        end
+      end
+    end
+
+  end
+
+  describe GgmDomain::Browser::AccessInfo do
+    context 'Andoroid Browser SOV34の場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new UA_OF_AU_SOV34_CR
+      end
+
+      it '端末名が SOV34 である' do
+        actual = access_info.device
+        expected = 'SOV34'
+        expect(actual).to eq(expected)
+      end
+
+      it 'osが Android である' do
+        actual = access_info.os
+        expected = 'Android'
+        expect(actual).to eq(expected)
+      end
+
+      it 'is_ios?が false である' do
+        actual = access_info.is_ios?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_android?が true である' do
+        actual = access_info.is_android?
+        expect(actual).to be_truthy
+      end
+
+      it 'is_pc?がfalseである' do
+        actual = access_info.is_pc?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_ggm?が false である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_falsey
+      end
+    end
+
+    context 'iOS Browser　の場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new UA_OF_IPHONE
+      end
+
+      it '端末名が iPhone である' do
+        actual = access_info.device
+        expected = 'iPhone'
+        expect(actual).to eq(expected)
+      end
+
+      it 'osが iPhone である' do
+        actual = access_info.os
+        expected = 'iPhone'
+        expect(actual).to eq(expected)
+      end
+
+      it 'is_ios?が true である' do
+        actual = access_info.is_ios?
+        expect(actual).to be_truthy
+      end
+
+      it 'is_android?が false である' do
+        actual = access_info.is_android?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_pc?がfalseである' do
+        actual = access_info.is_pc?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_ggm?が false である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_falsey
+      end
+    end
+
+    context 'Andoroid GGMの場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new GGM_ANDROID_LG
+      end
+
+      it 'is_ggm?が true である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_truthy
+      end
+    end
+
+    context 'iOS GGMの場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new GGM_IOS
+      end
+      it 'is_ggm?が true である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_truthy
+      end
+    end
+
+    context 'PC　の場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new UA_OF_MAC
+      end
+
+      it '端末名が Mac OSX である' do
+        actual = access_info.device
+        expected = 'Mac OSX'
+        expect(actual).to eq(expected)
+      end
+
+      it 'osが Mac OSX である' do
+        actual = access_info.os
+        expected = 'Mac OSX'
+        expect(actual).to eq(expected)
+      end
+
+      it 'is_ios?が false である' do
+        actual = access_info.is_ios?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_android?が false である' do
+        actual = access_info.is_android?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_pc?がtrueである' do
+        actual = access_info.is_pc?
+        expect(actual).to be_truthy
+      end
+
+      it 'is_ggm?が false である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_falsey
       end
     end
 

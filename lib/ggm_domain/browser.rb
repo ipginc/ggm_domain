@@ -2,32 +2,70 @@ module GgmDomain
   module Browser
     require 'woothee'
 
-    def self.what_is_os_name(ua)
-      Woothee.parse(ua)[:os]
+    class << self
+      def what_is_os_name(ua)
+        Woothee.parse(ua)[:os]
+      end
+
+      def is_ios?(ua)
+        %w(iPhone iPad iPod).include? what_is_os_name(ua)
+      end
+
+      def is_android?(ua)
+        what_is_os_name(ua) == 'Android'
+      end
+
+      def is_pc?(ua)
+        !is_ios?(ua) and !is_android?(ua)
+      end
+
+      def android_device_name(ua)
+        return nil unless is_android?(ua)
+        device_data = Woothee.parse(ua)
+        os_str = "#{device_data[:os]} #{device_data[:os_version]};"
+        start_index = ua.index(os_str)
+        return nil if start_index == nil
+        start_index = start_index + os_str.length
+        end_index = ua.index 'Build'
+        return nil if end_index == nil
+        ua.slice(start_index, end_index - start_index).strip
+      end
+
+      def is_ggm?(ua)
+        ua.match /GGM$/
+      end
     end
 
-    def self.is_ios?(ua)
-      %w(iPhone iPad iPod).include? what_is_os_name(ua)
-    end
+    class AccessInfo
+      attr_reader :ua
+      attr_reader :device
+      attr_reader :os
 
-    def self.is_android?(ua)
-      what_is_os_name(ua) == 'Android'
-    end
+      def initialize(ua)
+        @ua = ua
+        @os = Browser.what_is_os_name @ua
+        if Browser.is_android?(ua)
+          @device = Browser.android_device_name @ua
+        else
+          @device = @os
+        end
+      end
 
-    def self.is_pc?(ua)
-      !is_ios?(ua) and !is_android?(ua)
-    end
+      def is_ios?
+        Browser.is_ios? ua
+      end
 
-    def self.android_device_name(ua)
-      return nil unless is_android?(ua)
-      device_data = Woothee.parse(ua)
-      os_str = "#{device_data[:os]} #{device_data[:os_version]};"
-      start_index = ua.index(os_str)
-      return nil if start_index == nil
-      start_index = start_index + os_str.length
-      end_index = ua.index 'Build'
-      return nil if end_index == nil
-      ua.slice(start_index, end_index - start_index).strip
+      def is_android?
+        Browser.is_android? ua
+      end
+
+      def is_pc?
+        Browser.is_pc? ua
+      end
+
+      def is_ggm?
+        Browser.is_ggm? ua
+      end
     end
 
   end
