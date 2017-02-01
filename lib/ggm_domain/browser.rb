@@ -28,7 +28,13 @@ module GgmDomain
         start_index = start_index + os_str.length
         end_index = ua.index 'Build'
         return nil if end_index == nil
-        ua.slice(start_index, end_index - start_index).strip
+        device_name = ua.slice(start_index, end_index - start_index).strip
+        pos = device_name.index ';'
+        if pos.nil?
+          device_name
+        else
+          device_name.slice(pos + 1, device_name.length - pos).strip
+        end
       end
 
       def is_ggm?(ua)

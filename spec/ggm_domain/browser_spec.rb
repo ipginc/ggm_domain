@@ -17,6 +17,9 @@ describe GgmDomain::Browser do
 
   UA_OF_SB_NEXUS6P_CR = "Mozilla/5.0 (Linux; Android 7.0; Nexus 6P Build/XXXXXXX) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.90 Mobile Safari/537.36"
 
+  OLD_TYPE_UA = "Mozilla/5.0 (Linux; U; Android 4.4.2; ja-jp; SonySO-02E Build/10.5.1.B.0.155) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"
+  OLD_TYPE_UA2 = "Mozilla/5.0 (Linux; U; Android 2.3.4; ja-jp; SBM003SH Build/S4040) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 GGM"
+
   UA_OF_MAC = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17"
 
   GGM_ANDROID_LG = "Mozilla/5.0 (Linux; Android 5.0.2; DM-01G Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.93 Mobile Safari/537.36 GGM"
@@ -48,69 +51,79 @@ describe GgmDomain::Browser do
       end
     end
 
-    context 'auの場合' do
-      context 'Xperia XZ SOV34 chromeの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SOV34_CR
-          expected = 'Android'
-          expect(actual).to eq expected
+    describe 'Android' do
+      context 'auの場合' do
+        context 'Xperia XZ SOV34 chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SOV34_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+
+        context 'Xperia XZ SOV34 webviewの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SOV34_WV
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+
+        context 'Galaxy A8 SCV32 標準ブラウザの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_BR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+
+        context 'Galaxy A8 SCV32 chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+
+        context 'Galaxy A8 SCV32 webviewの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_WV
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
         end
       end
 
-      context 'Xperia XZ SOV34 webviewの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SOV34_WV
-          expected = 'Android'
-          expect(actual).to eq expected
+      context 'docomoの場合' do
+        context 'SH04H chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_SH04H_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+        context 'F04H chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_F04H_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
         end
       end
 
-      context 'Galaxy A8 SCV32 標準ブラウザの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_BR
-          expected = 'Android'
-          expect(actual).to eq expected
+      context 'softbankの場合' do
+        context 'NEXUS6P chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_SB_NEXUS6P_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
         end
       end
 
-      context 'Galaxy A8 SCV32 chromeの場合' do
+      context '古い形式のUAの場合' do
         it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_CR
-          expected = 'Android'
-          expect(actual).to eq expected
-        end
-      end
-
-      context 'Galaxy A8 SCV32 webviewの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SCV32_WV
-          expected = 'Android'
-          expect(actual).to eq expected
-        end
-      end
-    end
-
-    context 'docomoの場合' do
-      context 'SH04H chromeの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_SH04H_CR
-          expected = 'Android'
-          expect(actual).to eq expected
-        end
-      end
-      context 'F04H chromeの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_F04H_CR
-          expected = 'Android'
-          expect(actual).to eq expected
-        end
-      end
-    end
-
-    context 'softbankの場合' do
-      context 'NEXUS6P chromeの場合' do
-        it 'Androidが返却される' do
-          actual = GgmDomain::Browser.what_is_os_name UA_OF_SB_NEXUS6P_CR
+          actual = GgmDomain::Browser.what_is_os_name OLD_TYPE_UA
           expected = 'Android'
           expect(actual).to eq expected
         end
@@ -252,6 +265,22 @@ describe GgmDomain::Browser do
       it 'SOV34が返却される' do
         actual = GgmDomain::Browser.android_device_name UA_OF_AU_SOV34_CR
         expected = 'SOV34'
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context '古い形式のUAの場合1' do
+      it 'SonySO-02E　が返却される' do
+        actual = GgmDomain::Browser.android_device_name OLD_TYPE_UA
+        expected = 'SonySO-02E'
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context '古い形式のUAの場合2' do
+      it 'SBM003SH　が返却される' do
+        actual = GgmDomain::Browser.android_device_name OLD_TYPE_UA2
+        expected = 'SBM003SH'
         expect(actual).to eq(expected)
       end
     end
