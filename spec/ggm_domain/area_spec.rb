@@ -56,4 +56,58 @@ describe GgmDomain::Area do
 
   end
 
+  describe '#in_tver_area?' do
+    context '茨城の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 31
+        expect(actual).to be_truthy
+      end
+    end
+
+    context '栃木の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 33
+        expect(actual).to be_truthy
+      end
+    end
+    context '群馬の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 35
+        expect(actual).to be_truthy
+      end
+    end
+    context '埼玉の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 37
+        expect(actual).to be_truthy
+      end
+    end
+    context '千葉の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 40
+        expect(actual).to be_truthy
+      end
+    end
+    context '東京の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 42
+        expect(actual).to be_truthy
+      end
+    end
+    context '神奈川の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Area.in_tver_area? 45
+        expect(actual).to be_truthy
+      end
+    end
+
+    context '沖縄の場合' do
+      it 'falseが返却される' do
+        actual =GgmDomain::Area.in_tver_area? 134
+        expect(actual).to be_falsey
+      end
+    end
+
+  end
+
 end

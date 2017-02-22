@@ -114,6 +114,8 @@ module GgmDomain
         134 => '沖縄'
     }.each_value(&:freeze).freeze
 
+    TVER_AREAS =[31, 33, 35, 37, 40, 42, 45].map(&:freeze).freeze
+
     class << self
       def mapping_minds_to_ggm_code(area_code)
         MINDS_AREA_TO_GGM_GROUP_ID[area_code]
@@ -122,6 +124,11 @@ module GgmDomain
       def mapping_ggm_to_minds_code(ggm_group_id)
         GgmDomain::Area::MINDS_AREA_TO_GGM_GROUP_ID.invert[ggm_group_id]
       end
+
+      def in_tver_area?(ggm_group_id)
+        TVER_AREAS.include? ggm_group_id
+      end
+
     end
 
   end

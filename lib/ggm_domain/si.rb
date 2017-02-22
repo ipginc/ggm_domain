@@ -18,15 +18,16 @@ module GgmDomain
     REPRESENTATIVE_CUT = 'MainCut'.freeze
     PROGRAM_LOGO = 'LOGO'.freeze
 
-    def self.main_image(images)
-      representative_cut, program_logo = '', ''
-      images.each do |img|
-        return img.url if img.cid == EPISODE_CUT
-        representative_cut = img.url if img.cid == REPRESENTATIVE_CUT
-        program_logo= img.url if img.cid ==PROGRAM_LOGO
+    class << self
+      def main_image(images)
+        representative_cut, program_logo = '', ''
+        images.each do |img|
+          return img.url if img.cid == EPISODE_CUT
+          representative_cut = img.url if img.cid == REPRESENTATIVE_CUT
+          program_logo= img.url if img.cid ==PROGRAM_LOGO
+        end
+        representative_cut != '' ? representative_cut : program_logo
       end
-      representative_cut != '' ? representative_cut : program_logo
     end
-
   end
 end
