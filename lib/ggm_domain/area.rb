@@ -53,7 +53,8 @@ module GgmDomain
         59 => 129, #	宮崎
         60 => 127, #	大分
         61 => 122, #	佐賀
-        62 => 134 #	沖縄
+        62 => 134, #	沖縄
+        63 => 120  #	北九州
     }.each_value(&:freeze).freeze
 
     CAPITAL_GGM_GROUP_ID = 42.freeze
@@ -111,7 +112,8 @@ module GgmDomain
         129 => '宮崎',
         127 => '大分',
         122 => '佐賀',
-        134 => '沖縄'
+        134 => '沖縄',
+        120 => '北九州'
     }.each_value(&:freeze).freeze
 
     TVER_AREAS =[31, 33, 35, 37, 40, 42, 45].map(&:freeze).freeze
