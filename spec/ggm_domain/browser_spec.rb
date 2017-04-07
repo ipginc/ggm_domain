@@ -26,6 +26,12 @@ describe GgmDomain::Browser do
 
   GGM_IOS = "Mozilla/5.0 (Linux; Android 5.0.2; DM-01G Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.93 Mobile Safari/537.36 GGM"
 
+  GOOGLE_BOT_PC = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
+  GOOGLE_BOT_SP = '​Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.96 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
+  BEING_BOT = 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)'
+
   describe '#what_is_os_name' do
     context 'IOSの場合' do
       context 'iPhoneの場合' do
@@ -457,5 +463,66 @@ describe GgmDomain::Browser do
 
   end
 
+  describe '#is_crawler?' do
+    context 'IOSの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? UA_OF_IPHONE
+        expect(actual).to be_falsey
+      end
+    end
+    context 'iPadの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? UA_OF_IPAD
+        expect(actual).to be_falsey
+      end
+    end
+    context 'iPodの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? UA_OF_IPOD
+        expect(actual).to be_falsey
+      end
+    end
+    context 'Macの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? UA_OF_MAC
+        expect(actual).to be_falsey
+      end
+    end
+    context 'Andoroid GGMの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? GGM_ANDROID_LG
+        expect(actual).to be_falsey
+      end
+    end
+
+    context 'iOS GGMの場合' do
+      it 'falseが返却される' do
+        actual = GgmDomain::Browser.is_crawler? GGM_IOS
+        expect(actual).to be_falsey
+      end
+    end
+
+    context 'google crawler pcの場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Browser.is_crawler? GOOGLE_BOT_PC
+        expect(actual).to be_truthy
+      end
+    end
+
+    context 'google crawler pcの場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Browser.is_crawler? GOOGLE_BOT_PC
+        expect(actual).to be_truthy
+      end
+    end
+
+    context 'Being bot の場合' do
+      it 'trueが返却される' do
+        actual = GgmDomain::Browser.is_crawler? BEING_BOT
+        expect(actual).to be_truthy
+      end
+    end
+
+  end
 
 end

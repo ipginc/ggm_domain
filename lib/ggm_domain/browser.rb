@@ -40,6 +40,11 @@ module GgmDomain
       def is_ggm?(ua)
         ua.match /GGM$/
       end
+
+      def is_crawler?(ua)
+        Woothee.is_crawler(ua)
+      end
+
     end
 
     class AccessInfo
