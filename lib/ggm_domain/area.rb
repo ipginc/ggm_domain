@@ -151,6 +151,8 @@ module GgmDomain
 
     TVER_AREAS =[31, 33, 35, 37, 40, 42, 45].map(&:freeze).freeze
 
+    PPJ_AREAS =[31, 33, 35, 37, 40, 42, 45].map(&:freeze).freeze
+
     class << self
       def mapping_minds_to_ggm_code(area_code)
         MINDS_AREA_TO_GGM_GROUP_ID[area_code]
@@ -162,6 +164,10 @@ module GgmDomain
 
       def in_tver_area?(ggm_group_id)
         TVER_AREAS.include? ggm_group_id
+      end
+
+      def in_ppj_area?(ggm_group_id)
+        PPJ_AREAS.include? ggm_group_id
       end
 
     end
