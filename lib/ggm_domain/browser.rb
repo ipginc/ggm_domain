@@ -24,8 +24,14 @@ module GgmDomain
         device_data = Woothee.parse(ua)
         os_str = "#{device_data[:os]} #{device_data[:os_version]};"
         start_index = ua.index(os_str)
+        if device_data[:os_version] == 'UNKNOWN'
+          ua_slice = ua.slice(0,ua.index('Build'))
+          start_index = ua_slice.rindex(';') + 1
+        end
         return nil if start_index == nil
-        start_index = start_index + os_str.length
+        if device_data[:os_version] != 'UNKNOWN'
+          start_index = start_index + os_str.length
+        end
         end_index = ua.index 'Build'
         return nil if end_index == nil
         device_name = ua.slice(start_index, end_index - start_index).strip
