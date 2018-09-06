@@ -14,6 +14,7 @@ describe GgmDomain::Browser do
 
   UA_OF_DOCOMO_SH04H_CR = "Mozilla/5.0 (Linux; Android 7.0; SH-04H Build/SB247) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.85 Mobile Safari/537.36"
   UA_OF_DOCOMO_F04H_CR = "Mozilla/5.0 (Linux; Android 6.0.1; F-04H Build/V11R047B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.89 Safari/537.36"
+  UA_OF_DOCOMO_SO_01L_CR = "Mozilla/5.0 (Linux; Android 9; SO-01L Build/VVVV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.124 Mobile Safari/537.36"
 
   UA_OF_SB_NEXUS6P_CR = "Mozilla/5.0 (Linux; Android 7.0; Nexus 6P Build/XXXXXXX) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.90 Mobile Safari/537.36"
 
@@ -111,6 +112,13 @@ describe GgmDomain::Browser do
         context 'F04H chromeの場合' do
           it 'Androidが返却される' do
             actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_F04H_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+        context 'SO-01L chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_SO_01L_CR
             expected = 'Android'
             expect(actual).to eq expected
           end
@@ -270,6 +278,14 @@ describe GgmDomain::Browser do
     context 'Android6 SOV34の場合' do
       it 'SOV34が返却される' do
         actual = GgmDomain::Browser.android_device_name UA_OF_AU_SOV34_CR
+        expected = 'SOV34'
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context 'Android9 SO-01Lの場合' do
+      it 'SO-01Lが返却される' do
+        actual = GgmDomain::Browser.android_device_name UA_OF_DOCOMO_SO_01L_CR
         expected = 'SOV34'
         expect(actual).to eq(expected)
       end
