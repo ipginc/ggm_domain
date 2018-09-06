@@ -286,7 +286,7 @@ describe GgmDomain::Browser do
     context 'Android9 SO-01Lの場合' do
       it 'SO-01Lが返却される' do
         actual = GgmDomain::Browser.android_device_name UA_OF_DOCOMO_SO_01L_CR
-        expected = 'SOV34'
+        expected = 'SO-01L'
         expect(actual).to eq(expected)
       end
     end
