@@ -5,6 +5,8 @@ module GgmDomain
       CS = 2.freeze
       GROUND_WAVE = 3.freeze
       CS_PREMIUM = 9.freeze
+      BS4K = 20.freeze
+      CS4K = 30.freeze
       CUSTOM = 99.freeze
     end
 
