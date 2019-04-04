@@ -1,0 +1,85 @@
+PATH
+  remote: .
+  specs:
+    ggm_domain (0.0.14)
+      activemodel
+      activesupport
+      virtus
+      woothee
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (5.1.2)
+      activesupport (= 5.1.2)
+    activesupport (5.1.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    concurrent-ruby (1.0.5)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    diff-lcs (1.3)
+    docile (1.1.5)
+    equalizer (0.0.11)
+    i18n (0.8.6)
+    ice_nine (0.11.2)
+    json (2.1.0)
+    minitest (5.10.2)
+    rake (10.5.0)
+    rspec (3.6.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
+    rspec-core (3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-expectations (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-mocks (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-support (3.6.0)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.1)
+    simplecov-json (0.2)
+      json
+      simplecov
+    simplecov-rcov (0.2.3)
+      simplecov (>= 0.4.1)
+    thread_safe (0.3.6)
+    timecop (0.9.1)
+    tzinfo (1.2.3)
+      thread_safe (~> 0.1)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
+    woothee (1.7.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.13)
+  ggm_domain!
+  rake (~> 10.0)
+  rspec (~> 3.0)
+  simplecov
+  simplecov-json
+  simplecov-rcov
+  timecop
+
+BUNDLED WITH
+   1.16.5
