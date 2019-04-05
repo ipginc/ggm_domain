@@ -33,6 +33,9 @@ module GgmDomain
           start_index = start_index + os_str.length
         end
         end_index = ua.index 'Build'
+        if end_index == nil
+          end_index = ua.index ')'
+        end
         return nil if end_index == nil
         device_name = ua.slice(start_index, end_index - start_index).strip
         pos = device_name.index ';'
