@@ -11,10 +11,12 @@ describe GgmDomain::Browser do
   UA_OF_AU_SCV32_BR = "Mozilla/5.0 (Linux; Android 5.1.1; SCV32 Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.5 Chrome/38.0.2125.102 Mobile Safari/537.36"
   UA_OF_AU_SCV32_CR = "Mozilla/5.0 (Linux; Android 5.1.1; SCV32 Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.93 Mobile Safari/537.36"
   UA_OF_AU_SCV32_WV = "Mozilla/5.0 (Linux; Android 5.1.1; SCV32 Build/LMY47X; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.121 Mobile Safari/537.36"
+  UA_OF_AU_SOV39_CR_69 = "Mozilla/5.0 (Linux; Android 9; SOV39 Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36"
 
   UA_OF_DOCOMO_SH04H_CR = "Mozilla/5.0 (Linux; Android 7.0; SH-04H Build/SB247) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.85 Mobile Safari/537.36"
   UA_OF_DOCOMO_F04H_CR = "Mozilla/5.0 (Linux; Android 6.0.1; F-04H Build/V11R047B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.89 Safari/537.36"
   UA_OF_DOCOMO_SO_01L_CR = "Mozilla/5.0 (Linux; Android 9; SO-01L Build/VVVV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.124 Mobile Safari/537.36"
+  UA_OF_DOCOMO_L03K_CR_70 = "Mozilla/5.0 (Linux; Android 8.1.0; L-03K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Mobile Safari/537.36"
 
   UA_OF_SB_NEXUS6P_CR = "Mozilla/5.0 (Linux; Android 7.0; Nexus 6P Build/XXXXXXX) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.90 Mobile Safari/537.36"
 
@@ -99,6 +101,14 @@ describe GgmDomain::Browser do
             expect(actual).to eq expected
           end
         end
+
+        context 'Xperia XZ3 SOV39 chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_AU_SOV39_CR_69
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
       end
 
       context 'docomoの場合' do
@@ -119,6 +129,14 @@ describe GgmDomain::Browser do
         context 'SO-01L chromeの場合' do
           it 'Androidが返却される' do
             actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_SO_01L_CR
+            expected = 'Android'
+            expect(actual).to eq expected
+          end
+        end
+
+        context 'LG style L-03K chromeの場合' do
+          it 'Androidが返却される' do
+            actual = GgmDomain::Browser.what_is_os_name UA_OF_DOCOMO_L03K_CR_70
             expected = 'Android'
             expect(actual).to eq expected
           end
@@ -291,6 +309,22 @@ describe GgmDomain::Browser do
       end
     end
 
+    context 'Xperia XZ3 SOV39 chromeの場合' do
+      it 'SOV39が返却される' do
+        actual = GgmDomain::Browser.android_device_name UA_OF_AU_SOV39_CR_69
+        expected = 'SOV39'
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context 'LG style L-03K chromeの場合' do
+      it 'L-03Kが返却される' do
+        actual = GgmDomain::Browser.android_device_name UA_OF_DOCOMO_L03K_CR_70
+        expected = 'L-03K'
+        expect(actual).to eq(expected)
+      end
+    end
+
     context '古い形式のUAの場合1' do
       it 'SonySO-02E　が返却される' do
         actual = GgmDomain::Browser.android_device_name OLD_TYPE_UA
@@ -350,6 +384,44 @@ describe GgmDomain::Browser do
       it '端末名が SOV34 である' do
         actual = access_info.device
         expected = 'SOV34'
+        expect(actual).to eq(expected)
+      end
+
+      it 'osが Android である' do
+        actual = access_info.os
+        expected = 'Android'
+        expect(actual).to eq(expected)
+      end
+
+      it 'is_ios?が false である' do
+        actual = access_info.is_ios?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_android?が true である' do
+        actual = access_info.is_android?
+        expect(actual).to be_truthy
+      end
+
+      it 'is_pc?がfalseである' do
+        actual = access_info.is_pc?
+        expect(actual).to be_falsey
+      end
+
+      it 'is_ggm?が false である' do
+        actual = access_info.is_ggm?
+        expect(actual).to be_falsey
+      end
+    end
+
+    context 'Andoroid Browser L-03Kの場合' do
+      let(:access_info) do
+        GgmDomain::Browser::AccessInfo.new UA_OF_DOCOMO_L03K_CR_70
+      end
+
+      it '端末名が L-03K である' do
+        actual = access_info.device
+        expected = 'L-03K'
         expect(actual).to eq(expected)
       end
 
