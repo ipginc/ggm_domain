@@ -8,6 +8,7 @@ module GgmDomain
       BS4K = 20.freeze
       CS4K = 30.freeze
       CUSTOM = 99.freeze
+      RADIKO = 600.freeze
     end
 
     module NetworkId
